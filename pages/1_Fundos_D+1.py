@@ -8,8 +8,6 @@ st.set_page_config(page_title="Fundos D+1", layout="wide")
 aplicar_ui_padrao()
 render_titulo_padrao("Fundos D+1")
 
-BASE_DIR = Path(__file__).resolve().parent.parent
-
 tab1, tab2 = st.tabs([
     "Comparação entre fundos",
     "Comparação entre ativos"
