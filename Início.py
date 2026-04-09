@@ -18,7 +18,8 @@ aplicar_ui_padrao()
 TITULO_FIXO = "Comparador de Fundos"
 
 # BASE_DIR = Path(r"Z:\Asset Management\Equipe\Lívia\Rascunhos\Site_fundos")
-ARQUIVO_EXCEL = "Capa e correlação - site.xlsx"
+BASE_DIR = Path(__file__).resolve().parent
+ARQUIVO_EXCEL = BASE_DIR / "Capa e correlação - site.xlsx"
 ABA_CAPA = "CAPA"
 
 COL_INICIAL = 2   # B
