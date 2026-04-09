@@ -966,42 +966,55 @@ def render_pesquisa_ativo_por_data(
             else:
                 mask &= df[col].str.contains(termo, case=False, na=False)
 
-        # valores do ATIVO por data (somando caso haja mais de 1 linha)
+        # valores do ATIVO por data (consolida colunas que representam a mesma data)
         sub = df.loc[mask, date_cols].copy()
         if sub.empty:
             continue
 
-        vals = sub.sum(axis=0)
+        vals_bruto = sub.sum(axis=0)
+
+        vals_por_data = {}
+        for col in vals_bruto.index:
+            dt = dmap.get(col)
+            if dt is None:
+                continue
+            vals_por_data[dt] = vals_por_data.get(dt, 0.0) + float(vals_bruto[col])
+
+        vals = pd.Series(vals_por_data).sort_index()
         vals = vals[vals != 0]
         if vals.empty:
             continue
 
-        # total do fundo por data (para %PL)
-        total_fundo = df.loc[df["_TIPO"] != "", date_cols].sum(axis=0)
-        total_fundo = total_fundo.replace(0, pd.NA)
+        # total do fundo por data (para %PL), também consolidando datas repetidas
+        total_bruto = df.loc[df["_TIPO"] != "", date_cols].sum(axis=0)
+
+        total_por_data = {}
+        for col in total_bruto.index:
+            dt = dmap.get(col)
+            if dt is None:
+                continue
+            total_por_data[dt] = total_por_data.get(dt, 0.0) + float(total_bruto[col])
+
+        total_fundo = pd.Series(total_por_data).sort_index().replace(0, pd.NA)
 
         fundos_com_ativo.append(nome_fundo)
 
         # linha (tabela Fundo x Datas)
         row = {"Fundo": nome_fundo}
 
-        for col in vals.index:
-            dt = dmap.get(col)
-            if dt is None:
-                continue
-            dt_fmt = dt.strftime("%d/%m/%Y")
+        for dt in vals.index:
+            dt_fmt = pd.Timestamp(dt).strftime("%d/%m/%Y")
 
-            v_abs = float(vals[col])
+            v_abs = float(vals.loc[dt])
 
             if modo == "% do PL":
-                v_tot = total_fundo.get(col)
+                v_tot = total_fundo.get(dt)
                 v = float(v_abs / v_tot) if pd.notna(v_tot) and float(v_tot) != 0 else 0.0
             else:
                 v = v_abs
 
             row[dt_fmt] = v
 
-            # para o gráfico (Data real)
             plot_rows.append(
                 {"Fundo": nome_fundo, "Data": pd.Timestamp(dt), "Valor": v}
             )
