@@ -3,6 +3,7 @@ import streamlit as st
 
 from comparador_base import render_analise_fundo_individual
 from ui_padrao import aplicar_ui_padrao, render_titulo_padrao
+from pathlib import Path
 
 PASTA = Path(r"Z:\Asset Management\Equipe\Lívia\Rascunhos\Site_fundos")
 
