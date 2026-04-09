@@ -1059,46 +1059,31 @@ def render_pesquisa_ativo_por_data(
 # -------- GRÁFICO --------
     st.markdown("### Evolução do ativo (ao longo do tempo)")
 
-    plot_df = pd.DataFrame(plot_rows).copy()
+    plot_df = out_num.copy()
 
     if plot_df.empty:
         st.info("Não há dados para montar o gráfico.")
         return
 
     plot_df["Fundo"] = plot_df["Fundo"].astype(str).replace("nan", "").replace("None", "").str.strip()
-    plot_df["Data"] = pd.to_datetime(plot_df["Data"], errors="coerce")
-    plot_df["Valor"] = pd.to_numeric(plot_df["Valor"], errors="coerce").fillna(0.0)
+
+    plot_df = plot_df.melt(
+        id_vars="Fundo",
+        value_vars=date_cols_fmt_sorted,
+        var_name="Data",
+        value_name="Valor_plot"
+    )
+
+    plot_df["Data"] = pd.to_datetime(plot_df["Data"], errors="coerce", dayfirst=True)
+    plot_df["Valor_plot"] = pd.to_numeric(plot_df["Valor_plot"], errors="coerce").fillna(0.0)
 
     plot_df = plot_df[
         (plot_df["Fundo"] != "") &
+        (plot_df["Fundo"].notna()) &
         (plot_df["Data"].notna())
     ].copy()
 
-    # SEGURANÇA: consolida qualquer duplicidade restante
-    plot_df = (
-        plot_df.groupby(["Fundo", "Data"], as_index=False)["Valor"]
-        .sum()
-        .sort_values(["Fundo", "Data"])
-    )
-
-    if modo == "Normalizado (Base 100)":
-        def _normalizar_grupo(grp):
-            grp = grp.sort_values("Data").copy()
-            base = grp["Valor"].replace(0, pd.NA).dropna()
-            if base.empty:
-                grp["Valor_plot"] = grp["Valor"]
-            else:
-                primeiro = float(base.iloc[0])
-                grp["Valor_plot"] = (grp["Valor"] / primeiro) * 100.0
-            return grp
-
-        plot_df = (
-            plot_df.groupby("Fundo", group_keys=False)
-            .apply(_normalizar_grupo)
-            .reset_index(drop=True)
-        )
-    else:
-        plot_df["Valor_plot"] = plot_df["Valor"]
+    plot_df = plot_df.sort_values(["Fundo", "Data"])
 
     if modo == "Valor (R$)":
         titulo_y = "Valor (R$)"
@@ -1138,7 +1123,9 @@ def render_pesquisa_ativo_por_data(
         x="Data:T"
     ).add_params(hover)
 
-    points = lines.mark_circle(size=70).encode(
+    points = base.mark_circle(size=70).encode(
+        x="Data:T",
+        y="Valor_plot:Q",
         opacity=alt.condition(hover, alt.value(1), alt.value(0))
     )
 
@@ -1162,7 +1149,7 @@ def render_pesquisa_ativo_por_data(
         color=alt.Color("Fundo:N", legend=None)
     ).transform_filter(hover)
 
-    tooltip_points = alt.Chart(plot_df).mark_circle(opacity=0, size=220).encode(
+    tooltip_points = base.mark_circle(opacity=0, size=220).encode(
         x="Data:T",
         y="Valor_plot:Q",
         tooltip=[
@@ -1170,7 +1157,7 @@ def render_pesquisa_ativo_por_data(
             alt.Tooltip("Fundo:N", title="Fundo"),
             alt.Tooltip("Valor_plot:Q", title=titulo_y, format=formato_tooltip),
         ]
-    ).transform_filter(hover)
+    )
 
     zoom = alt.selection_interval(bind="scales", encodings=["x", "y"])
 
