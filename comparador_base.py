@@ -158,8 +158,25 @@ def build_fund_table(df_raw: pd.DataFrame) -> Tuple[pd.DataFrame, List[str], Dic
     out = df[cols_base + date_cols].copy()
     out["_ATIVO"] = out.apply(asset_key, axis=1).astype(str).str.strip()
 
+    MARCADORES_FIM = {"SOMA_COLUNA", "PL_CDA_FI_PL", "DIFERENCA", "STATUS"}
+
+    out[COL_CODIGO] = out[COL_CODIGO].astype(str).replace("nan", "").replace("None", "").str.strip()
+    out[COL_DESCRICAO] = out[COL_DESCRICAO].astype(str).replace("nan", "").replace("None", "").str.strip()
+
+    out = out[
+        ~out[COL_CODIGO].isin(MARCADORES_FIM) &
+        ~out[COL_DESCRICAO].isin(MARCADORES_FIM)
+    ].copy()
+
     if col_tipo:
-        out["_TIPO"] = out[col_tipo].astype(str).replace("nan", "").str.strip()
+        out["_TIPO"] = (
+            out[col_tipo]
+            .astype(str)
+            .replace("nan", "")
+            .replace("None", "")
+            .replace("NaT", "")
+            .str.strip()
+        )
     else:
         out["_TIPO"] = ""
 
