@@ -1060,7 +1060,26 @@ def render_pesquisa_ativo_por_data(
     st.markdown("### Evolução do ativo (ao longo do tempo)")
 
     plot_df = pd.DataFrame(plot_rows).copy()
-    plot_df = plot_df.sort_values("Data")
+
+    if plot_df.empty:
+        st.info("Não há dados para montar o gráfico.")
+        return
+
+    plot_df["Fundo"] = plot_df["Fundo"].astype(str).replace("nan", "").replace("None", "").str.strip()
+    plot_df["Data"] = pd.to_datetime(plot_df["Data"], errors="coerce")
+    plot_df["Valor"] = pd.to_numeric(plot_df["Valor"], errors="coerce").fillna(0.0)
+
+    plot_df = plot_df[
+        (plot_df["Fundo"] != "") &
+        (plot_df["Data"].notna())
+    ].copy()
+
+    # SEGURANÇA: consolida qualquer duplicidade restante
+    plot_df = (
+        plot_df.groupby(["Fundo", "Data"], as_index=False)["Valor"]
+        .sum()
+        .sort_values(["Fundo", "Data"])
+    )
 
     if modo == "Normalizado (Base 100)":
         def _normalizar_grupo(grp):
