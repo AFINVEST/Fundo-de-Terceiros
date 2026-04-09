@@ -827,7 +827,7 @@ def listar_opcoes_busca(wb: Dict[str, pd.DataFrame], nome_coluna: str) -> list[s
 
         valores.extend([v for v in serie if str(v).strip() != ""])
 
-    return sorted(set(valores))
+    return sorted({str(v).strip() for v in valores if str(v).strip() not in {"", "nan", "None", "NaT"}})
 
 def render_pesquisa_ativo_por_data(
     pasta: str,
