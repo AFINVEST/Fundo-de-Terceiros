@@ -9,6 +9,8 @@ PASTA = Path(r"Z:\Asset Management\Equipe\Lívia\Rascunhos\Site_fundos")
 
 st.set_page_config(page_title="Análise de Fundo", layout="wide")
 
+BASE_DIR = Path(__file__).resolve().parent.parent
+
 aplicar_ui_padrao()
 render_titulo_padrao("Análise de Fundo")
 
