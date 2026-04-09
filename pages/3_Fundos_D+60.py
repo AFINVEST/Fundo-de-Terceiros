@@ -21,12 +21,12 @@ with tab1:
         pasta=str(BASE_DIR),
         arquivo_xlsx="carteira_fundos_consolidada.xlsx",
         titulo="Fundos D+60",
-        abas_permitidas=["HORIZONTE", "JGP Select", "ARX Everest Advisory", "Polo Total", "Absolute Olimpia"]  # opcional
+        abas_permitidas=["Horizonte", "JGP Select", "ARX Everest Advisory", "Polo Total", "Absolute Olimpia"]  # opcional
     )
      
 with tab2:
     render_pesquisa_ativo_por_data(
         pasta=str(BASE_DIR),
         arquivo_xlsx="carteira_fundos_consolidada.xlsx",
-        abas_permitidas=["HORIZONTE", "JGP Select", "ARX Everest Advisory", "Polo Total", "Absolute Olimpia"]  # <-- somente fundos D+60
+        abas_permitidas=["Horizonte", "JGP Select", "ARX Everest Advisory", "Polo Total", "Absolute Olimpia"]  # <-- somente fundos D+60
     )
