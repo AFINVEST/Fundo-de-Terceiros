@@ -10,8 +10,9 @@ from tratar_planilha_consolidada import executar_tratamento
 # =========================================================
 # CONFIGURAÇÕES
 # =========================================================
-PASTA_BASE = Path(r"Z:\Asset Management\Equipe\Lívia\Rascunhos\Site_fundos\Base Carteira Fundos")
-ARQUIVO_SAIDA = Path(r"Z:\Asset Management\Equipe\Lívia\Rascunhos\Site_fundos\carteira_fundos_consolidada.xlsx")
+BASE_DIR = Path(__file__).resolve().parent
+PASTA_BASE = BASE_DIR / "Base Carteira Fundos"
+ARQUIVO_SAIDA = BASE_DIR / "carteira_fundos_consolidada.xlsx"
 
 FUNDOS = {
     #"GERAES": "09.720.734/0001-10",
