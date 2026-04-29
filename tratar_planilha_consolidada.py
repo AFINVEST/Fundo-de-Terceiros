@@ -15,7 +15,7 @@ from openpyxl.utils import get_column_letter
 # =========================================================
 # CONFIGURAÇÕES
 # =========================================================
-ARQUIVO_CARTEIRA = Path(r"Z:\Asset Management\Equipe\Lívia\Rascunhos\Site_fundos\carteira_fundos_consolidada.xlsx")
+ARQUIVO_CARTEIRA = Path(r"Z:\Asset Management\Equipe\Lívia\Rascunhos\Comparação Fundo de Terceiros\Fundo-de-Terceiros\carteira_fundos_consolidada.xlsx")
 ARQUIVO_SAIDA = ARQUIVO_CARTEIRA
 ARQUIVO_BASE_MANUAL = ARQUIVO_CARTEIRA.with_name("cadastro_manual_ativos.xlsx")
 

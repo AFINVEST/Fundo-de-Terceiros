@@ -15,7 +15,7 @@ PASTA_BASE = BASE_DIR / "Base Carteira Fundos"
 ARQUIVO_SAIDA = BASE_DIR / "carteira_fundos_consolidada.xlsx"
 
 FUNDOS = {
-    #"GERAES": "09.720.734/0001-10",
+    #GERAES": "09.720.734/0001-10",
     #"ARX Denali": "41.888.219/0001-56",
     #"Capitânia Top": "13.615.411/0001-33",
     #"Riza Lotus": "36.498.670/0001-27",
@@ -82,7 +82,7 @@ COLUNAS_CHAVE_AGRUPAMENTO = COLUNAS_FIXAS + ["DataRef"]
 REPROCESSAR_ULTIMOS_MESES = 0
 
 # Se quiser forçar meses específicos, coloque aqui
-REPROCESSAR_COMPETENCIAS = ["202411"]
+REPROCESSAR_COMPETENCIAS = ["202512"]
 # REPROCESSAR_COMPETENCIAS: list[str] = []
 
 # =========================================================

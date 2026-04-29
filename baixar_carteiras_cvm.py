@@ -25,7 +25,7 @@ HEADERS = {
     "User-Agent": "Mozilla/5.0"
 }
 
-REPROCESSAR_COMPETENCIAS = ["202512"]   # deixe [] quando não quiser forçar nada
+REPROCESSAR_COMPETENCIAS = ["202601"]   # deixe [] quando não quiser forçar nada
 
 # =========================================================
 # FUNÇÕES AUXILIARES
