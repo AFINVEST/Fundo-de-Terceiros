@@ -12,6 +12,23 @@ import streamlit.components.v1 as components
 from openpyxl.utils import get_column_letter, range_boundaries
 from ui_padrao import aplicar_ui_padrao
 
+# Para atualizar o site, deve rodar no vs code:
+
+# git add .gitignore
+# git add cadastro_manual_ativos.xlsx
+# git add carteira_fundos_consolidada.xlsx
+# git add consolidar_planilha.py
+# git add tratar_planilha_consolidada.py
+# git add baixar_carteiras_cvm.py
+
+# Depois:
+# git status
+
+# Depois: 
+# git commit -m "Atualiza consolidação das carteiras dos fundos"
+
+# Depois:
+# git push
 
 st.set_page_config(page_title="Comparador de Fundos", layout="wide")
 aplicar_ui_padrao()
