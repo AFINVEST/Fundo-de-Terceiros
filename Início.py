@@ -14,14 +14,20 @@ from ui_padrao import aplicar_ui_padrao
 
 # Para atualizar o site, deve rodar no vs code:
 
+#git status
+
+# Depois:
+
 # git add .gitignore
 # git add cadastro_manual_ativos.xlsx
 # git add carteira_fundos_consolidada.xlsx
 # git add consolidar_planilha.py
 # git add tratar_planilha_consolidada.py
 # git add baixar_carteiras_cvm.py
+# git add "Início.py"
+# git add "pages/4_Análise_Fundo.py"
 
-# Depois:
+# Depois, novamente:
 # git status
 
 # Depois: 
