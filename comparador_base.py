@@ -3,6 +3,7 @@ from __future__ import annotations
 import re
 from pathlib import Path
 from typing import Dict, List, Optional, Tuple
+from io import BytesIO
 
 import pandas as pd
 import streamlit as st
@@ -767,19 +768,34 @@ def render_comparacao_fundos(
 
     render_sectionbar("Exportar", "sectionbar-exportar")
 
-    if st.button("Gerar Excel da comparação", key=f"{titulo}_btn_export"):
-        out_path = pasta_path / f"comparacao_{fundo_a}_vs_{fundo_b}_{data_escolhida.strftime('%Y-%m-%d')}.xlsx"
-        with pd.ExcelWriter(out_path, engine="openpyxl") as writer:
-            tab_a.to_excel(writer, index=False, sheet_name=f"{fundo_a}_carteira"[:31])
-            tab_b.to_excel(writer, index=False, sheet_name=f"{fundo_b}_carteira"[:31])
-            t_common.to_excel(writer, index=False, sheet_name="Comuns")
-            t_only_a.to_excel(writer, index=False, sheet_name=f"So_{fundo_a}"[:31])
-            t_only_b.to_excel(writer, index=False, sheet_name=f"So_{fundo_b}"[:31])
-            pd.DataFrame(
-                {"Fundo": [fundo_a, fundo_b], "Data": [data_escolhida_fmt, data_escolhida_fmt], "Patrimonio": [total_a, total_b]}
-            ).to_excel(writer, index=False, sheet_name="Patrimonio")
+    nome_arquivo = f"comparacao_{fundo_a}_vs_{fundo_b}_{data_escolhida.strftime('%Y-%m-%d')}.xlsx"
 
-        st.success(f"Arquivo gerado em: {out_path}")
+    buffer = BytesIO()
+
+    with pd.ExcelWriter(buffer, engine="openpyxl") as writer:
+        tab_a.to_excel(writer, index=False, sheet_name=f"{fundo_a}_carteira"[:31])
+        tab_b.to_excel(writer, index=False, sheet_name=f"{fundo_b}_carteira"[:31])
+        t_common.to_excel(writer, index=False, sheet_name="Comuns")
+        t_only_a.to_excel(writer, index=False, sheet_name=f"So_{fundo_a}"[:31])
+        t_only_b.to_excel(writer, index=False, sheet_name=f"So_{fundo_b}"[:31])
+
+        pd.DataFrame(
+            {
+                "Fundo": [fundo_a, fundo_b],
+                "Data": [data_escolhida_fmt, data_escolhida_fmt],
+                "Patrimonio": [total_a, total_b],
+        }
+        ).to_excel(writer, index=False, sheet_name="Patrimonio")
+
+    buffer.seek(0)
+
+    st.download_button(
+        label="Baixar Excel da comparação",
+        data=buffer,
+        file_name=nome_arquivo,
+        mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+        key=f"{titulo}_download_export"
+    )
 
 def _fund_wide_to_long(df_fund: pd.DataFrame, fund_name: str, date_cols: List[str]) -> pd.DataFrame:
     """1 fundo (wide) -> long: Fundo, Codigo, Descrição, Tipo, Data, Ano, Valor"""
