@@ -1342,17 +1342,63 @@ for grupo, cfg in GRUPOS.items():
 # exportação
 render_sectionbar("Exportar", "sectionbar-exportar")
 buffer = BytesIO()
+
 with pd.ExcelWriter(buffer, engine="openpyxl") as writer:
+    # 1) Primeiro: abas de ATIVOS BASE, na ordem solicitada
+    ativos_classificados_base["Fundo D+1"].to_excel(
+        writer,
+        index=False,
+        sheet_name="Base D+1",
+    )
+
+    ativos_classificados_base["Fundo D+30"].to_excel(
+        writer,
+        index=False,
+        sheet_name="Base D+30",
+    )
+
+    ativos_classificados_base["Fundo D+60"].to_excel(
+        writer,
+        index=False,
+        sheet_name="Base D+60",
+    )
+
+    # 2) Depois: restante das abas na ordem original
     for grupo in GRUPOS:
         sheet_prefix = grupo.replace("Fundo ", "").replace("+", "p").replace(" ", "")
-        remover_origem(resultados_atual[grupo]).to_excel(writer, index=False, sheet_name=f"{sheet_prefix}_Atual"[:31])
-        remover_origem(resultados_base[grupo]).to_excel(writer, index=False, sheet_name=f"{sheet_prefix}_Base"[:31])
-        remover_origem(deltas_pl[grupo]).to_excel(writer, index=False, sheet_name=f"{sheet_prefix}_Delta_PL"[:31])
-        remover_origem(deltas_valor[grupo]).to_excel(writer, index=False, sheet_name=f"{sheet_prefix}_Delta_RS"[:31])
-        remover_origem(deltas_pct[grupo]).to_excel(writer, index=False, sheet_name=f"{sheet_prefix}_Delta_pct"[:31])
-        ativos_classificados_atual[grupo].to_excel(writer, index=False, sheet_name=f"{sheet_prefix}_Ativos_Analise"[:31])
-        ativos_classificados_base[grupo].to_excel(writer,  index=False, sheet_name=f"{sheet_prefix}_Ativos_Base"[:31])
+
+        remover_origem(resultados_atual[grupo]).to_excel(
+            writer,
+            index=False,
+            sheet_name=f"{sheet_prefix}_Atual"[:31],
+        )
+
+        remover_origem(resultados_base[grupo]).to_excel(
+            writer,
+            index=False,
+            sheet_name=f"{sheet_prefix}_Base"[:31],
+        )
+
+        remover_origem(deltas_pl[grupo]).to_excel(
+            writer,
+            index=False,
+            sheet_name=f"{sheet_prefix}_Delta_PL"[:31],
+        )
+
+        remover_origem(deltas_valor[grupo]).to_excel(
+            writer,
+            index=False,
+            sheet_name=f"{sheet_prefix}_Delta_RS"[:31],
+        )
+
+        remover_origem(deltas_pct[grupo]).to_excel(
+            writer,
+            index=False,
+            sheet_name=f"{sheet_prefix}_Delta_pct"[:31],
+        )
+
 buffer.seek(0)
+
 st.download_button(
     label="Baixar Excel da comparação por categorias",
     data=buffer,
