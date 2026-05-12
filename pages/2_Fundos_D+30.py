@@ -21,12 +21,12 @@ with tab1:
         pasta=str(BASE_DIR),
         arquivo_xlsx="carteira_fundos_consolidada.xlsx",
         titulo="Fundos D+30",
-        abas_permitidas=["GERAES 30", "Daycoval Classic 30", "Riza Lotus Plus", "ARX Vinson Advisory", "Sparta Max Advisory", "Polo Crédito Corporativo", "Iridium Titam Advisory", "Porto Seguro Ipê", "Sparta Top Advisory", "Absolute Creta"]  # opcional
+        abas_permitidas=["GERAES 30", "Daycoval Classic 30", "Riza Lotus Plus", "ARX Vinson Advisory", "Sparta Max Advisory", "Polo Crédito Corporativo", "Iridium Titan Advisory", "Porto Seguro Ipê", "Sparta Top Advisory", "Absolute Creta"]  # opcional
     )
         
 with tab2:
     render_pesquisa_ativo_por_data(
         pasta=str(BASE_DIR),
         arquivo_xlsx="carteira_fundos_consolidada.xlsx",
-        abas_permitidas=["GERAES 30", "Daycoval Classic 30", "Riza Lotus Plus", "ARX Vinson Advisory", "Sparta Max Advisory", "Polo Crédito Corporativo", "Iridium Titam Advisory", "Porto Seguro Ipê", "Sparta Top Advisory", "Absolute Creta"]  # <-- somente fundos D+30
+        abas_permitidas=["GERAES 30", "Daycoval Classic 30", "Riza Lotus Plus", "ARX Vinson Advisory", "Sparta Max Advisory", "Polo Crédito Corporativo", "Iridium Titan Advisory", "Porto Seguro Ipê", "Sparta Top Advisory", "Absolute Creta"]  # <-- somente fundos D+30
     )

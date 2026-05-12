@@ -367,6 +367,7 @@ st.markdown("""
     <p style="margin: 0 0 2px 0;">2- Fundos D+30</p>
     <p style="margin: 0 0 2px 0;">3- Fundos D+60</p>
     <p style="margin: 0;">4- Análise Fundo</p>
+    <p style="margin: 0;">5- Comparação Fundos</p>        
 </div>
 """, unsafe_allow_html=True)
 

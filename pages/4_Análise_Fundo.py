@@ -22,13 +22,13 @@ with tab1:
         pasta=str(BASE_DIR),
         arquivo_xlsx="carteira_fundos_consolidada.xlsx",
         titulo="Análise de Carteira (Fundo Individual)",
-        abas_permitidas=["GERAES", "ARX Denali", "Capitânia Top", "Riza Lotus", "Western Asset Total", "Daycoval Classic", "Iridium Apollo", "Porto Seguro FIRF", "Nu Reserva Imediata", "Inter Conservador", "Absolute Atenas", "GERAES 30", "Daycoval Classic 30", "Riza Lotus Plus", "ARX Vinson Advisory", "Sparta Max Advisory", "Polo Crédito Corporativo", "Iridium Titam Advisory", "Porto Seguro Ipê", "Sparta Top Advisory", "Absolute Creta", "Horizonte", "JGP Select", "ARX Everest Advisory", "Polo Total", "Absolute Olimpia"]  # opcional
+        abas_permitidas=["GERAES", "ARX Denali", "Capitânia Top", "Riza Lotus", "Western Asset Total", "Daycoval Classic", "Iridium Apollo", "Porto Seguro FIRF", "Nu Reserva Imediata", "Inter Conservador", "Absolute Atenas", "GERAES 30", "Daycoval Classic 30", "Riza Lotus Plus", "ARX Vinson Advisory", "Sparta Max Advisory", "Polo Crédito Corporativo", "Iridium Titan Advisory", "Porto Seguro Ipê", "Sparta Top Advisory", "Absolute Creta", "Horizonte", "JGP Select", "ARX Everest Advisory", "Polo Total", "Absolute Olimpia"]  # opcional
     )
 
 with tab2:
     render_pesquisa_ativo_por_data(
         pasta=str(BASE_DIR),
         arquivo_xlsx="carteira_fundos_consolidada.xlsx",
-        abas_permitidas=["GERAES", "ARX Denali", "Capitânia Top", "Riza Lotus", "Western Asset Total", "Daycoval Classic", "Iridium Apollo", "Porto Seguro FIRF", "Nu Reserva Imediata", "Inter Conservador", "Absolute Atenas", "GERAES 30", "Daycoval Classic 30", "Riza Lotus Plus", "ARX Vinson Advisory", "Sparta Max Advisory", "Polo Crédito Corporativo", "Iridium Titam Advisory", "Porto Seguro Ipê", "Sparta Top Advisory", "Absolute Creta", "Horizonte", "JGP Select", "ARX Everest Advisory", "Polo Total", "Absolute Olimpia"]  # <-- somente fundos D+30
+        abas_permitidas=["GERAES", "ARX Denali", "Capitânia Top", "Riza Lotus", "Western Asset Total", "Daycoval Classic", "Iridium Apollo", "Porto Seguro FIRF", "Nu Reserva Imediata", "Inter Conservador", "Absolute Atenas", "GERAES 30", "Daycoval Classic 30", "Riza Lotus Plus", "ARX Vinson Advisory", "Sparta Max Advisory", "Polo Crédito Corporativo", "Iridium Titan Advisory", "Porto Seguro Ipê", "Sparta Top Advisory", "Absolute Creta", "Horizonte", "JGP Select", "ARX Everest Advisory", "Polo Total", "Absolute Olimpia"]  # <-- somente fundos D+30
     )
 
