@@ -15,7 +15,7 @@ PASTA_BASE = BASE_DIR / "Base Carteira Fundos"
 ARQUIVO_SAIDA = BASE_DIR / "carteira_fundos_consolidada.xlsx"
 
 FUNDOS = {
-    #GERAES": "09.720.734/0001-10",
+    #"GERAES": "09.720.734/0001-10",
     #"ARX Denali": "41.888.219/0001-56",
     #"Capitânia Top": "13.615.411/0001-33",
     #"Riza Lotus": "36.498.670/0001-27",
@@ -26,8 +26,8 @@ FUNDOS = {
     #"Nu Reserva Imediata": "42.699.466/0001-77",
     #"Inter Conservador": "20.879.578/0001-77",
     #"Absolute Atenas": "48.096.589/0001-08",
-    "GERAES 30": "29.044.189/0001-04",
-    #"Daycoval Classic 30": "29.250.121/0001-73",
+    #"GERAES 30": "29.044.189/0001-04",
+    "Daycoval Classic 30": "29.250.121/0001-73",
     #"Riza Lotus Plus": "43.917.493/0001-31",
     #"ARX Vinson Advisory": "41.888.492/0001-80",
     #"Sparta Max Advisory": "32.757.330/0001-12",
@@ -57,8 +57,8 @@ FUNDOS_PROCESSAR = [
     #"Nu Reserva Imediata",
     #"Inter Conservador",
     #"Absolute Atenas",
-    "GERAES 30",
-    #"Daycoval Classic 30",
+    #"GERAES 30",
+    "Daycoval Classic 30",
     #"Riza Lotus Plus",
     #"ARX Vinson Advisory",
     #"Sparta Max Advisory",
@@ -82,7 +82,7 @@ COLUNAS_CHAVE_AGRUPAMENTO = COLUNAS_FIXAS + ["DataRef"]
 REPROCESSAR_ULTIMOS_MESES = 0
 
 # Se quiser forçar meses específicos, coloque aqui
-REPROCESSAR_COMPETENCIAS = ["202512"]
+REPROCESSAR_COMPETENCIAS = ["202602"]
 # REPROCESSAR_COMPETENCIAS: list[str] = []
 
 # =========================================================

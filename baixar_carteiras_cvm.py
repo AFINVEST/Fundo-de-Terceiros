@@ -12,7 +12,7 @@ import requests
 # =========================================================
 # CONFIGURAÇÕES
 # =========================================================
-PASTA_BASE = Path(r"Z:\Asset Management\Equipe\Lívia\Rascunhos\Site_fundos\Base Carteira Fundos")
+PASTA_BASE = Path(r"Z:\Asset Management\Equipe\Lívia\Rascunhos\Comparação Fundo de Terceiros\Fundo-de-Terceiros\Base Carteira Fundos")
 
 URL_MENSAL_BASE = "https://dados.cvm.gov.br/dados/FI/DOC/CDA/DADOS"
 URL_HIST_BASE = "https://dados.cvm.gov.br/dados/FI/DOC/CDA/DADOS/HIST"
@@ -25,7 +25,7 @@ HEADERS = {
     "User-Agent": "Mozilla/5.0"
 }
 
-REPROCESSAR_COMPETENCIAS = ["202601"]   # deixe [] quando não quiser forçar nada
+REPROCESSAR_COMPETENCIAS = ["202603"]   # deixe [] quando não quiser forçar nada
 
 # =========================================================
 # FUNÇÕES AUXILIARES
